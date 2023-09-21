@@ -1,0 +1,26 @@
+@keyframes textAppears {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes appears-left {
+  0% {
+    transform: translateX(-110%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes appears-right {
+  0% {
+    transform: translateX(110%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

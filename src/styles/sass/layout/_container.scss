@@ -1,0 +1,19 @@
+.introduction-container {
+    margin: 4em 2em;
+    overflow: hidden;
+    p {
+        margin: 2em 0;
+    }
+    .first {
+        transform: translateX(-110%);
+        &.appears {
+            animation: appears-left .6s forwards;
+        }
+    }
+    .second {
+        transform: translateX(110%);
+        &.appears {
+            animation: appears-right .6s forwards;
+        }
+    }
+}
