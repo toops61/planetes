@@ -2,3 +2,17 @@ button {
     border-radius: .4em;
     padding: .2em .5em;
 }
+
+.back-to-top {
+    position: fixed;
+    right: 1.5em;
+    bottom: 1em;
+    transition: .6s;
+    opacity: 0;
+    &.appears {
+        opacity: 1;
+    }
+    &::before {
+        @include icon('\f0aa',1.8em);
+    }
+}

@@ -1,0 +1,9 @@
+.arrow-down {
+    position: fixed;
+    bottom: 1em;
+    left: .5em;
+    &::before {
+        @include icon('\f309',3em);
+    }
+    animation: flashing-arrow 6s forwards;
+}
