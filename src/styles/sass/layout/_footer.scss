@@ -1,0 +1,33 @@
+footer {
+    margin: 1em 0;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    justify-content: space-between;
+    p {
+        font-size: .8em;
+        margin-right: 1em;
+    }
+    a {
+        color: white;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.source {
+    display: flex;
+    align-items: center;
+    .logo {
+        width: 3em;
+        height: 3em;
+        img {
+            @include imageFit;
+        }
+    }
+}
+
+.code a::before {
+    @include iconBrands;
+}

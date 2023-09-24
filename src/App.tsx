@@ -1,14 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 import PlanetsSection from "./components/PlanetsSection";
 import Arrow from "./components/Arrow";
+import logoNasa from "./assets/logo_nasa.webp";
 
 function App() {
   const [nextAppears, setNextAppears] = useState(false);
+  const [tresholdsArray, setTresholdsArray] = useState<number[]>([]);
+  
 
   const introRef = useRef<HTMLDivElement>(null);
   const arrowRef = useRef<HTMLDivElement>(null);
   
   const planetsRef = useRef<HTMLDivElement[]>([]);
+
+  const fillTresholds = () => {
+    const tempArray : number[] = [];
+    for (let i = 0; i < 100; i++) {
+      tempArray.push(i/100);
+    }
+    setTresholdsArray(tempArray);
+  }
 
   const observer = new IntersectionObserver(
     entries => {
@@ -28,31 +39,39 @@ function App() {
         }
         planetsRef.current.map(planetDiv => {
           if (entry.target === planetDiv) {
+            
             const textContent = planetDiv.children[1].children[0];
             const imageContent = planetDiv.children[1].children[1];
             const imageBefore = imageContent.children[0] as HTMLImageElement;
             const imageAfter = imageContent.children[1] as HTMLImageElement;
 
             entry.intersectionRatio > .4 ? planetDiv.classList.add('appears') : planetDiv.classList.remove('appears');
-            if (entry.intersectionRatio > .5) {
+
+            if (window.scrollY < planetDiv.offsetTop) {
               entry.intersectionRatio > .8 ? textContent.classList.add('appears') : textContent.classList.remove('appears');
-              imageBefore.style.opacity = (1 - (entry.intersectionRatio/2)).toString();
-              imageAfter.style.opacity = (entry.intersectionRatio/2).toString();
+  
+              if (entry.intersectionRatio > .5) {
+                imageBefore.style.opacity = (1 - (entry.intersectionRatio - .5)*2).toString();
+                imageAfter.style.opacity = ((entry.intersectionRatio - .5)*2).toString();
+              } else {
+                imageBefore.style.opacity = '1';
+                imageAfter.style.opacity = '0';
+              }
             } else {
-              imageBefore.style.opacity = '1';
-              imageAfter.style.opacity = '0';
+              textContent.classList.add('appears');
+              imageBefore.style.opacity = '0';
+                imageAfter.style.opacity = '1';
             }
           }
         })
       })
     },{
-      threshold:[0,.4,.45,.5,.55,.6,.65,.7,.75,.8,.85,.9,.95,1]
+      threshold:tresholdsArray
     }
   );
 
   useEffect(() => {
     if (planetsRef.current) {
-      console.log(planetsRef.current);
       planetsRef.current.forEach(e => observer.observe(e));
     } 
     
@@ -65,12 +84,13 @@ function App() {
   }, [nextAppears])
 
   useEffect(() => {
+    fillTresholds();
     setTimeout(() => {
       setNextAppears(true);
     }, 3000);
 
     const windowScroll = () => {
-      window.scrollY > 500 ? arrowRef.current?.classList.add('appears') : arrowRef.current?.classList.remove('appears');
+      window.scrollY > 500 ? arrowRef.current?.classList.add('appears') : arrowRef.current?.classList.remove('appears');      
     } 
 
     window.addEventListener('scroll', windowScroll);
@@ -92,14 +112,30 @@ function App() {
         <>
           <section className="introduction-container" ref={introRef}>
             <article className="first">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. In magni neque dolorem odio doloribus dicta cumque id ratione tempore placeat! Iusto, deserunt? Distinctio rerum dignissimos maiores, commodi nobis quaerat? Molestias architecto nesciunt porro similique rem, sunt praesentium provident! Reprehenderit eligendi eos, vitae qui veritatis, quo molestias labore quisquam ad dolor ullam? Ipsam ad rem quae consequatur. Iusto quaerat maiores quam debitis cupiditate. Quo dolorum modi quam, enim dicta 
+              Le BigBang s'est déroulé il y a maintenant 13,8 milliards d'années. Les planètes du système solaire se sont formées puis ont évolué.<br/>Certaines ont très peu changé depuis des millions d'années comme Uranus ou Neptune mais d'autres sont radicalement différentes, et ce, à cause de l'intéraction avec les autres planètes, leur proximité avec le soleil, leur atmosphère ou encore à des cataclysmes survenus il y a plus ou moins longtemps.
             </article>
             <article className="second">
-              dolores vel at sapiente tempore beatae necessitatibus in maxime voluptates debitis atque commodi qui dolore. Aliquid cum, ab dolorum sapiente labore consequatur tempora error adipisci, in nulla enim ipsam accusantium ut eligendi nam deleniti incidunt quos culpa beatae consequuntur delectus quo. Sunt deleniti perferendis officia, provident vel ratione fugit eveniet ullam quos modi voluptatum placeat tempore beatae dicta asperiores at. Quae at expedita nostrum consequatur voluptate cum debitis. Dolorum dolores consequatur accusantium sunt odit pariatur, sapiente est, nam aut quibusdam ratione illo perspiciatis praesentium ullam neque natus vel voluptates officia reiciendis reprehenderit cumque nemo, voluptate maxime! Vitae unde fugiat sit, labore exercitationem commo.
+              Les anneaux de Saturne ont été formés, des satellites ont été créés ou, au contraire, désintégrés, ont fusionné; des océans sont apparus, ont disparu.<br/>
+              La Terre évolue aussi et cette évolution s'accélère et est perturbée par la présence et l'activité de l'Homme. Nous le constatons de plus en plus et le dérèglement climatique devient critique.<br />Pourtant, d'autres planètes ont aussi connu un changement rendant parfois leur températures et conditions extrêmes à l'image de Vénus.
             </article>
           </section>
           <div className="arrow-down"></div>
           <PlanetsSection ref={planetsRef} />
+          <footer>
+            <div className="source">
+              <p>Source des images : </p>
+              <a href="https://www.nasa.gov/">Nasa 
+                <div className="logo">
+                  <img src={logoNasa} alt="Nasa" />
+                </div>
+              </a>
+            </div>
+            <div className="code">
+              <a href="https://github.com/toops61/planetes" target="_blank" rel="noreferrer" >
+                <p>Code source</p>
+              </a>
+            </div>
+          </footer>
         </> : 
         <></>
       }

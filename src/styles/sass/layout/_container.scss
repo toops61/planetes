@@ -1,6 +1,10 @@
 .introduction-container {
-    margin: 4em 2em;
+    transition: .8s;
+    opacity: 1;
+    padding: 4em 2em;
     overflow: hidden;
+    background-image: url('../assets/images/univers.webp');
+    box-shadow: inset 0 0 2em 2em #000;
     article {
         margin: 2em 0;
         font-size: 1.5em;

@@ -13,6 +13,6 @@ button {
         opacity: 1;
     }
     &::before {
-        @include icon('\f0aa',1.8em);
+        @include icon;
     }
 }
