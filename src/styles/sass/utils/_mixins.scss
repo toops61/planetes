@@ -4,24 +4,6 @@
     object-fit: contain;
 }
 
-@mixin position ($top: 0px, $right: 0px) {
-    top: $top;
-    right: $right;
-}
-
-@mixin positionTopLeft ($top: 0, $left: 0) {
-    top: $top;
-    left: $left;
-}
-
-@mixin textShadow {
-    text-shadow: 2px 2px 4px black;
-}
-
-@mixin btn-shadow ($offsetX: 2px, $offsetY: 2px, $blur: 14px, $color: black)  {
-    box-shadow: $offsetX $offsetY $blur $color;
-}
-
 @mixin flexColumn {
     display: flex;
     flex-direction: column;
@@ -32,12 +14,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-@mixin portrait-version {
-    @media (orientation: portrait) {
-        @content;
-    }
 }
 
 @mixin mobile-version {
@@ -64,17 +40,6 @@
     margin: 1rem;
 }
 
-@mixin iconEmpty ($content: "\f005", $font-size: 1.4em) {
-    content: $content;
-    font-family: 'Font Awesome 6 empty';
-    font-weight: 400;
-    font-size: $font-size;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1;
-}
-
 @mixin icon ($content: '\f0aa', $font-size: 1.8em) {
     content: $content;
     font-family: 'Font Awesome 6';
@@ -84,36 +49,4 @@
     font-variant: normal;
     text-rendering: auto;
     line-height: 1;
-}
-
-@mixin text-shadow ($color:black) {
-    text-shadow: 2px 2px 1px $color;
-}
-
-@mixin adapt-size ($font-size: 4vw) {
-    @media screen and (max-width: 600px) {
-        * {
-            font-size: $font-size;
-        }
-    }
-}
-
-@mixin point-style {
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    background-color: rgb(112, 112, 112);
-    margin: 0 .5em;
-}
-
-@mixin popup {
-    padding: .6em;
-    background-color: rgb(97, 97, 97);
-    * {
-        color: #f1f1f1;
-    }
-}
-
-@mixin button-shadow {
-    box-shadow: 2px 2px 6px;
 }

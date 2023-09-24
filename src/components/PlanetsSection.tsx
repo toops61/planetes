@@ -14,8 +14,8 @@ const PlanetsSection = forwardRef<HTMLDivElement[]>((_props,planetsRef) => {
     
     const planets = [
         {...new PlanetObj('Mars',planetsInfos.Mars.before_content,planetsInfos.Mars.after_content,marsBeforePic,marsAfterPic,uuidv4())},
-        {...new PlanetObj('Venus',planetsInfos.Venus.before_content,planetsInfos.Venus.after_content,venusBeforePic,venusAfterPic,uuidv4())},
-        {...new PlanetObj('Earth',planetsInfos.Earth.before_content,planetsInfos.Earth.after_content,earthBeforePic,earthAfterPic,uuidv4())}
+        {...new PlanetObj('Vénus',planetsInfos.Venus.before_content,planetsInfos.Venus.after_content,venusBeforePic,venusAfterPic,uuidv4())},
+        {...new PlanetObj('La Terre',planetsInfos.Earth.before_content,planetsInfos.Earth.after_content,earthBeforePic,earthAfterPic,uuidv4())}
     ]
 
     if (!(planetsRef && 'current' in planetsRef && planetsRef.current)) return null;

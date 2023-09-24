@@ -112,7 +112,7 @@ function App() {
         <>
           <section className="introduction-container" ref={introRef}>
             <article className="first">
-              Le BigBang s'est déroulé il y a maintenant 13,8 milliards d'années. Les planètes du système solaire se sont formées puis ont évolué.<br/>Certaines ont très peu changé depuis des millions d'années comme Uranus ou Neptune mais d'autres sont radicalement différentes, et ce, à cause de l'intéraction avec les autres planètes, leur proximité avec le soleil, leur atmosphère ou encore à des cataclysmes survenus il y a plus ou moins longtemps.
+              Le Big Bang s'est déroulé il y a maintenant 13,8 milliards d'années. Les planètes du système solaire se sont formées puis ont évolué.<br/>Certaines ont très peu changé depuis des millions d'années comme Uranus ou Neptune mais d'autres sont radicalement différentes, et ce, à cause de l'interaction avec les autres planètes, leur proximité avec le soleil, leur atmosphère ou encore à des cataclysmes survenus il y a plus ou moins longtemps.
             </article>
             <article className="second">
               Les anneaux de Saturne ont été formés, des satellites ont été créés ou, au contraire, désintégrés, ont fusionné; des océans sont apparus, ont disparu.<br/>
@@ -124,7 +124,7 @@ function App() {
           <footer>
             <div className="source">
               <p>Source des images : </p>
-              <a href="https://www.nasa.gov/">Nasa 
+              <a href="https://www.nasa.gov/" target="_blank" rel="noreferrer">Nasa 
                 <div className="logo">
                   <img src={logoNasa} alt="Nasa" />
                 </div>
