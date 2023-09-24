@@ -7,11 +7,14 @@ export default defineConfig(({ command }) => {
       port:5160
     },
     plugins: [react()],
-    base: '/'
+    base: '/',
+    build: {
+      target: ["es2019","chrome70"]
+    }
   }
 
   if (command !== 'serve') {
-    config.base = 'https://toops61.github.io/Toops-planetes/'
+    config.base = 'https://toops61.github.io/planets/'
   }
 
   return config
