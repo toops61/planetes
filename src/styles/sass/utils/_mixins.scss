@@ -16,6 +16,12 @@
     align-items: center;
 }
 
+@mixin portraitVersion {
+    @media (orientation: portrait) {
+        @content;
+    }
+}
+
 @mixin mobile-version {
     @media screen and (max-width:$breakpoint-mobile) {
         @content;

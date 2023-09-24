@@ -40,10 +40,15 @@ function App() {
         planetsRef.current.map(planetDiv => {
           if (entry.target === planetDiv) {
             
-            const textContent = planetDiv.children[1].children[0];
+            const textContent = planetDiv.children[1].children[0] as HTMLDivElement;
+            const textBefore = textContent.children[0] as HTMLParagraphElement;
+            const textAfter = textContent.children[1] as HTMLParagraphElement;
+
             const imageContent = planetDiv.children[1].children[1];
             const imageBefore = imageContent.children[0] as HTMLImageElement;
             const imageAfter = imageContent.children[1] as HTMLImageElement;
+
+            textContent.style.height = (textBefore.offsetHeight > textAfter.offsetHeight) ? (textBefore.offsetHeight + 'px') : (textAfter.offsetHeight + 'px');            
 
             entry.intersectionRatio > .4 ? planetDiv.classList.add('appears') : planetDiv.classList.remove('appears');
 
@@ -60,7 +65,7 @@ function App() {
             } else {
               textContent.classList.add('appears');
               imageBefore.style.opacity = '0';
-                imageAfter.style.opacity = '1';
+              imageAfter.style.opacity = '1';
             }
           }
         })

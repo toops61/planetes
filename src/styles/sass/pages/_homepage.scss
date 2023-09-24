@@ -1,6 +1,6 @@
 .title-container {
     width: 80%;
-    height: 12em;
+    min-height: 12em;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -57,8 +57,8 @@
 
 .text-content {
     position: relative;
-    flex: 1;
     padding: 1em;
+    width: 50%;
     p {
         font-size: 1.2em;
     }
@@ -80,5 +80,21 @@
         .after {
             opacity: 1;
         }
+    }
+}
+
+@include portraitVersion {
+    .title-container {
+        h1,p {
+            font-size: 3em;
+            margin: 1em 0;
+        }
+    }
+    .inside-planet {
+        flex-direction: column;
+    }
+    .text-content {
+        margin: 1em;
+        width: 100%;
     }
 }
