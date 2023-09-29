@@ -38,8 +38,6 @@ function App() {
             break;
         }
         planetsRef.current.map(planetDiv => {
-          if (entry.target === planetDiv) {
-            
             const textContent = planetDiv.children[1].children[0] as HTMLDivElement;
             const textBefore = textContent.children[0] as HTMLParagraphElement;
             const textAfter = textContent.children[1] as HTMLParagraphElement;
@@ -47,14 +45,19 @@ function App() {
             const imageContent = planetDiv.children[1].children[1];
             const imageBefore = imageContent.children[0] as HTMLImageElement;
             const imageAfter = imageContent.children[1] as HTMLImageElement;
-
+          if (entry.target === planetDiv) {
             textContent.style.height = (textBefore.offsetHeight > textAfter.offsetHeight) ? (textBefore.offsetHeight + 'px') : (textAfter.offsetHeight + 'px');            
 
-            entry.intersectionRatio > .4 ? planetDiv.classList.add('appears') : planetDiv.classList.remove('appears');
+            entry.intersectionRatio > .3 ? planetDiv.classList.add('appears') : planetDiv.classList.remove('appears');
 
             if (window.scrollY < planetDiv.offsetTop) {
               entry.intersectionRatio > .8 ? textContent.classList.add('appears') : textContent.classList.remove('appears');
-  
+            } else {
+              textContent.classList.add('appears');
+            }
+          }
+          if (entry.target === imageContent) {
+            if (window.scrollY < planetDiv.offsetTop) {
               if (entry.intersectionRatio > .5) {
                 imageBefore.style.opacity = (1 - (entry.intersectionRatio - .5)*2).toString();
                 imageAfter.style.opacity = ((entry.intersectionRatio - .5)*2).toString();
@@ -63,7 +66,6 @@ function App() {
                 imageAfter.style.opacity = '0';
               }
             } else {
-              textContent.classList.add('appears');
               imageBefore.style.opacity = '0';
               imageAfter.style.opacity = '1';
             }
@@ -74,17 +76,17 @@ function App() {
       threshold:tresholdsArray
     }
   );
-
-  useEffect(() => {
-    if (planetsRef.current) {
-      planetsRef.current.forEach(e => observer.observe(e));
-    } 
-    
-  }, [nextAppears])
   
   useEffect(() => {
     if (nextAppears) {
       introRef.current && observer.observe(introRef.current);
+    }
+    if (planetsRef.current) {
+      planetsRef.current.forEach(planetDiv => {
+        observer.observe(planetDiv);
+        observer.observe(planetDiv.children[1].children[1]);
+
+      });
     }
   }, [nextAppears])
 
@@ -109,17 +111,17 @@ function App() {
   return (
     <main className="App">
       <section className="title-container">
-        <h1>Hier ...</h1>
-        <p>... Aujourd'hui</p>
+        <h1 tabIndex={0}>Hier ...</h1>
+        <p tabIndex={0}>... Aujourd'hui</p>
       </section>
       {
         nextAppears ? 
         <>
           <section className="introduction-container" ref={introRef}>
-            <article className="first">
+            <article className="first" tabIndex={0}>
               Le Big Bang s'est déroulé il y a maintenant 13,8 milliards d'années. Les planètes du système solaire se sont formées puis ont évolué.<br/>Certaines ont très peu changé depuis des millions d'années comme Uranus ou Neptune mais d'autres sont radicalement différentes, et ce, à cause de l'interaction avec les autres planètes, leur proximité avec le soleil, leur atmosphère ou encore à des cataclysmes survenus il y a plus ou moins longtemps.
             </article>
-            <article className="second">
+            <article className="second" tabIndex={0}>
               Les anneaux de Saturne ont été formés, des satellites ont été créés ou, au contraire, désintégrés, ont fusionné; des océans sont apparus, ont disparu.<br/>
               La Terre évolue aussi et cette évolution s'accélère et est perturbée par la présence et l'activité de l'Homme. Nous le constatons de plus en plus et le dérèglement climatique devient critique.<br />Pourtant, d'autres planètes ont aussi connu un changement rendant parfois leur températures et conditions extrêmes à l'image de Vénus.
             </article>

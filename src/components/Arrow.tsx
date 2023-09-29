@@ -9,7 +9,7 @@ const Arrow = forwardRef<HTMLDivElement>((_props,arrowRef) => {
         });
     }
   return (
-    <div className="back-to-top" onClick={bodyScrollTop} ref={arrowRef} ></div>
+    <div className="back-to-top" onClick={bodyScrollTop} ref={arrowRef} tabIndex={0} ></div>
   )
 })
 
