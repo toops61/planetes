@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import PlanetsSection from "./components/PlanetsSection";
 import Arrow from "./components/Arrow";
-import logoNasa from "./assets/logo_nasa.webp";
+import logoNasa from "./assets/images/logo_nasa.webp";
+import logoNasaMini from "./assets/images/logo_nasa_mini.webp";
 
 function App() {
   const [nextAppears, setNextAppears] = useState(false);
@@ -133,7 +134,11 @@ function App() {
               <p>Source des images : </p>
               <a href="https://www.nasa.gov/" target="_blank" rel="noreferrer">Nasa 
                 <div className="logo">
-                  <img src={logoNasa} alt="Nasa" />
+                  <img 
+                    srcSet={(`${logoNasaMini} 480w, ${logoNasa} 800w`)} 
+                    sizes="(max-width: 600px) 480px,800px" 
+                    src={logoNasa} 
+                    alt="Nasa" />
                 </div>
               </a>
             </div>

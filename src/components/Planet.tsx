@@ -3,7 +3,9 @@ interface planetProps {
     before_content: string;
     after_content: string;
     before_pict: string;
+    before_mini: string;
     after_pict: string;
+    after_mini: string;
     id: string;
 }
 
@@ -18,8 +20,20 @@ export default function Planet({planet}:{planet:planetProps}) {
                 <p className="after" tabIndex={0}>{planet.after_content}</p>
             </div>
             <div className="picture-content" tabIndex={0}>
-                <img src={planet.before_pict} alt={planet.name + " before"} className="before" />
-                <img src={planet.after_pict} alt={planet.name + " after"} className="after" />
+                <img 
+                    srcSet={(`${planet.before_mini} 480w, ${planet.before_pict} 800w`)} 
+                    sizes="(max-width: 600px) 480px,800px" 
+                    src={planet.before_pict} 
+                    alt={planet.name + " before"} 
+                    className="before" 
+                />
+                <img 
+                    srcSet={(`${planet.after_mini} 480w, ${planet.after_pict} 800w`)} 
+                    sizes="(max-width: 600px) 480px,800px" 
+                    src={planet.after_pict} 
+                    alt={planet.name + " after"} 
+                    className="after" 
+                />
             </div>
         </div>
     </>
